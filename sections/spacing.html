@@ -1,0 +1,40 @@
+  <!-- ============ SPACING ============ -->
+  <section id="spacing">
+    <h2><span class="n">05</span> Spacing</h2>
+    <p class="sec-desc">4px를 기본 단위로 하는 <b>4pt 그리드</b>를 씁니다. 연구소의 정돈된 인상은 여백의 규칙성에서 나옵니다 — 임의의 px값 대신 아래 스케일 안에서만 고릅니다.</p>
+
+    <div class="space-scale">
+      <div class="sp-row"><span class="sp-tag">4</span><i class="sp-bar" style="width:4px"></i><span class="sp-name">xs · 아이콘 내부 여백</span></div>
+      <div class="sp-row"><span class="sp-tag">8</span><i class="sp-bar" style="width:8px"></i><span class="sp-name">sm · 배지 내부, 인접 요소 간격</span></div>
+      <div class="sp-row"><span class="sp-tag">12</span><i class="sp-bar" style="width:12px"></i><span class="sp-name">md · 버튼 내부 여백</span></div>
+      <div class="sp-row"><span class="sp-tag">16</span><i class="sp-bar" style="width:16px"></i><span class="sp-name">base · 카드 내부 여백(모바일)</span></div>
+      <div class="sp-row"><span class="sp-tag">24</span><i class="sp-bar" style="width:24px"></i><span class="sp-name">lg · 카드 내부 여백(데스크톱)</span></div>
+      <div class="sp-row"><span class="sp-tag">32</span><i class="sp-bar" style="width:32px"></i><span class="sp-name">xl · 요소 그룹 간 간격</span></div>
+      <div class="sp-row"><span class="sp-tag">48</span><i class="sp-bar" style="width:48px"></i><span class="sp-name">2xl · 섹션 내부 블록 간격</span></div>
+      <div class="sp-row"><span class="sp-tag">64</span><i class="sp-bar" style="width:64px"></i><span class="sp-name">3xl · 섹션 상하 여백(모바일)</span></div>
+      <div class="sp-row"><span class="sp-tag">96</span><i class="sp-bar" style="width:96px"></i><span class="sp-name">4xl · 섹션 상하 여백(데스크톱)</span></div>
+    </div>
+
+    <h3>페이지 구조 기준값</h3>
+    <div class="usage">
+      <div class="card">
+        <div class="u-head" style="color:var(--accent)">데스크톱</div>
+        <ul class="kv-list">
+          <li><b>섹션 상하 여백</b><span>96px</span></li>
+          <li><b>카드 내부 여백</b><span>24px</span></li>
+          <li><b>버튼 내부 여백</b><span>12 · 24px</span></li>
+          <li><b>카드 사이 간격</b><span>16px</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="u-head" style="color:var(--accent)">모바일 (480px 이하)</div>
+        <ul class="kv-list">
+          <li><b>섹션 상하 여백</b><span>64px</span></li>
+          <li><b>카드 내부 여백</b><span>16px</span></li>
+          <li><b>버튼 내부 여백</b><span>10 · 20px</span></li>
+          <li><b>카드 사이 간격</b><span>12px</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">4의 배수를 벗어난 값(예: 10px, 15px, 22px)은 사용하지 않습니다. 스케일에 없는 간격이 필요하면 가장 가까운 값으로 반올림합니다.</div>
+  </section>

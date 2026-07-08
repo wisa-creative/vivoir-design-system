@@ -1,0 +1,41 @@
+  <!-- ============ COMPONENTS : FORM & INPUT ============ -->
+  <section id="c-form">
+    <h3>Form &amp; Input</h3>
+    <div class="grp-note">포커스 상태는 언제나 <b>Sapphire 링</b>입니다. 성공·오류 색은 브랜드 Core/Event가 아닌 <b>기능색(Functional Color)</b>으로 별도 관리합니다 — 브랜드 톤을 희석하지 않기 위함입니다.</div>
+
+    <div class="form-lab">
+      <div class="f-group">
+        <label class="f-label">상품 옵션</label>
+        <input class="f-input" placeholder="기본 상태" />
+      </div>
+      <div class="f-group">
+        <label class="f-label">포커스 상태</label>
+        <input class="f-input f-focus" placeholder="입력 중..." />
+      </div>
+      <div class="f-group">
+        <label class="f-label f-label-err">배송지 우편번호</label>
+        <input class="f-input f-error" value="12345a" />
+        <span class="f-help f-help-err">우편번호는 숫자만 입력하세요</span>
+      </div>
+      <div class="f-group">
+        <label class="f-label">품절 옵션</label>
+        <input class="f-input f-disabled" placeholder="선택 불가" disabled />
+      </div>
+      <div class="f-group">
+        <label class="f-label">상품 검색</label>
+        <div class="f-search">
+          <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.3" y1="15.3" x2="21" y2="21"/></svg>
+          <input placeholder="찾으시는 상품을 입력하세요" />
+        </div>
+      </div>
+      <div class="f-group">
+        <label class="f-label">체크 · 라디오</label>
+        <div class="f-choices">
+          <label class="f-check"><input type="checkbox" checked/> 재입고 알림 신청</label>
+          <label class="f-radio"><input type="radio" name="opt" checked/> 화이트</label>
+          <label class="f-radio"><input type="radio" name="opt"/> 사파이어</label>
+        </div>
+      </div>
+    </div>
+    <div class="callout"><b>기능색</b> — Error #E5484D · Success #1FAA59. 유효성 검증 등 기능적 피드백에만 쓰고, 배지·버튼 등 브랜드 표현에는 사용하지 않습니다.</div>
+  </section>

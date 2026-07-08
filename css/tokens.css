@@ -1,0 +1,53 @@
+/* VIVOIR Design System — Tokens
+   Core/Event 컬러, 시맨틱 변수, 폰트, 기본 리셋 */
+
+  :root{
+    /* Foundations — Color (from styleguide p.9) */
+    --sapphire:#0F52BA;      /* Main */
+    --deep-navy:#000926;     /* Sub */
+    --powder:#A6C5D8;        /* Soft Powder Blue */
+    --ice:#D6E6F3;
+    --neon-orange:#FF6B35;   /* Event only */
+    --yellow:#FFBF00;        /* Event only */
+
+    /* Semantic — light */
+    --bg:#FFFFFF;
+    --bg-soft:#F4F8FC;
+    --surface:#FFFFFF;
+    --line:#E3ECF5;
+    --line-strong:#CBDBEC;
+    --ink:#0B1B33;
+    --ink-soft:#4A6076;
+    --ink-faint:#8A9BAD;
+    --accent:var(--sapphire);
+    --sidebar-bg:#FBFCFE;
+
+    --r-sm:6px; --r-md:12px; --r-lg:20px;
+    --disp:'Space Grotesk',system-ui,sans-serif;
+    --body:'Pretendard',system-ui,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+    --sidebar-w:264px;
+    --maxw:860px;
+  }
+  html[data-theme="dark"]{
+    --bg:#00040F;
+    --bg-soft:#050D22;
+    --surface:#081127;
+    --line:#152641;
+    --line-strong:#1F3457;
+    --ink:#EAF1FA;
+    --ink-soft:#9DB2C9;
+    --ink-faint:#5E748C;
+    --accent:#5B8EE6;
+    --sidebar-bg:#040A1A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    transition:background .3s,color .3s;
+  }

@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIVOIR · Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Foundations — Color (from styleguide p.9) */
+    --sapphire:#0F52BA;      /* Main */
+    --deep-navy:#000926;     /* Sub */
+    --powder:#A6C5D8;        /* Soft Powder Blue */
+    --ice:#D6E6F3;
+    --neon-orange:#FF6B35;   /* Event only */
+    --yellow:#FFBF00;        /* Event only */
+
+    /* Semantic — light */
+    --bg:#FFFFFF;
+    --bg-soft:#F4F8FC;
+    --surface:#FFFFFF;
+    --line:#E3ECF5;
+    --line-strong:#CBDBEC;
+    --ink:#0B1B33;
+    --ink-soft:#4A6076;
+    --ink-faint:#8A9BAD;
+    --accent:var(--sapphire);
+    --sidebar-bg:#FBFCFE;
+
+    --r-sm:6px; --r-md:12px; --r-lg:20px;
+    --disp:'Space Grotesk',system-ui,sans-serif;
+    --body:'Pretendard',system-ui,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+    --sidebar-w:264px;
+    --maxw:860px;
+  }
+  html[data-theme="dark"]{
+    --bg:#00040F;
+    --bg-soft:#050D22;
+    --surface:#081127;
+    --line:#152641;
+    --line-strong:#1F3457;
+    --ink:#EAF1FA;
+    --ink-soft:#9DB2C9;
+    --ink-faint:#5E748C;
+    --accent:#5B8EE6;
+    --sidebar-bg:#040A1A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    transition:background .3s,color .3s;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;
+    background:var(--sidebar-bg);border-right:1px solid var(--line);
+    padding:28px 20px;overflow-y:auto;transition:background .3s,border-color .3s;
+  }
+  .sb-logo{display:flex;align-items:center;gap:10px;margin-bottom:6px;padding:0 6px}
+  .sb-logo svg{width:88px;height:auto}
+  .sb-logo svg{color:var(--accent)}
+  .sb-sub{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--ink-faint);
+    text-transform:uppercase;padding:0 6px;margin-bottom:26px}
+  .sb-group{margin-bottom:22px}
+  .sb-group h4{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-faint);padding:0 8px;margin-bottom:9px}
+  .sb-group a{display:block;font-size:13.5px;color:var(--ink-soft);text-decoration:none;
+    padding:6px 8px;border-radius:var(--r-sm);transition:.15s;cursor:pointer}
+  .sb-group a:hover{background:var(--bg-soft);color:var(--ink)}
+  .sb-group a.active{background:rgba(15,82,186,.1);color:var(--accent);font-weight:600}
+  html[data-theme="dark"] .sb-group a.active{background:rgba(91,142,230,.14)}
+  .sb-group a.wip{display:flex;align-items:center;justify-content:space-between;opacity:.55;cursor:default}
+  .sb-group a.wip:hover{background:none;color:var(--ink-soft)}
+  .wip-badge{font-family:var(--mono);font-size:8.5px;letter-spacing:.03em;font-weight:600;
+    color:#B8794A;background:rgba(255,107,53,.14);border-radius:5px;padding:2px 6px;flex-shrink:0}
+
+  /* ---------- Theme toggle ---------- */
+  .toggle{
+    position:fixed;top:22px;right:34px;z-index:50;
+    display:flex;align-items:center;gap:8px;
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:999px;padding:7px 14px;cursor:pointer;font-size:12px;
+    color:var(--ink-soft);font-family:var(--mono);letter-spacing:.04em;
+    transition:.2s;
+  }
+  .toggle:hover{border-color:var(--line-strong);color:var(--ink)}
+
+  /* ---------- Main ---------- */
+  main{margin-left:var(--sidebar-w);padding:76px 56px 120px;}
+  .wrap{max-width:var(--maxw);margin:0 auto}
+
+  .hero-mark{width:200px;height:auto;margin-bottom:28px}
+  .hero-mark{color:var(--accent)}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:14px}
+  h1.page{font-family:var(--disp);font-size:44px;font-weight:700;letter-spacing:-.01em;
+    line-height:1.1;margin-bottom:18px}
+  .lead{font-size:16px;color:var(--ink-soft);max-width:620px;margin-bottom:14px}
+
+  section{margin-top:64px;scroll-margin-top:40px}
+  h2{font-family:var(--disp);font-size:26px;font-weight:600;letter-spacing:-.01em;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+  h2 .n{font-family:var(--mono);font-size:13px;color:var(--ink-faint);font-weight:400}
+  .sec-desc{color:var(--ink-soft);font-size:14.5px;margin-bottom:24px;max-width:620px}
+  h3{font-size:15px;font-weight:600;margin:28px 0 12px;letter-spacing:.01em}
+
+  /* callout */
+  .callout{background:var(--bg-soft);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:var(--r-md);padding:16px 20px;font-size:13.5px;color:var(--ink-soft);margin:18px 0}
+  .callout b{color:var(--ink)}
+
+  /* logo display panels */
+  .panel-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+  .panel{border:1px solid var(--line);border-radius:var(--r-md);padding:34px 30px;
+    display:flex;align-items:center;justify-content:center;min-height:130px;position:relative;overflow:hidden}
+  .panel .cap{position:absolute;top:11px;left:14px;font-family:var(--mono);font-size:9.5px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+  .panel svg{width:150px;height:auto}
+  .p-white{background:#fff}
+  .p-white svg{color:var(--sapphire)}
+  .p-white .cap{color:#8A9BAD}
+  .p-sapphire{background:var(--sapphire)}
+  .p-sapphire svg{color:#fff}
+  .p-sapphire .cap{color:rgba(255,255,255,.6)}
+  .p-navy{background:var(--deep-navy)}
+  .p-navy svg{color:#fff}
+  .p-navy .cap{color:rgba(255,255,255,.5)}
+  .p-ice{background:var(--ice)}
+  .p-ice svg{color:var(--sapphire)}
+  .p-ice .cap{color:#5A7B96}
+
+  /* clear space diagram */
+  .clearspace{border:1px solid var(--line);border-radius:var(--r-md);background:var(--bg-soft);
+    padding:48px;display:flex;justify-content:center;margin:18px 0}
+  .cs-box{position:relative;padding:var(--pad,44px);border:1px dashed var(--line-strong);border-radius:8px}
+  .cs-box svg{width:190px;height:auto;display:block}
+  .cs-box svg{color:var(--accent)}
+  .cs-guide{position:absolute;font-family:var(--mono);font-size:10px;color:var(--accent);
+    background:var(--bg);padding:2px 6px;border-radius:4px}
+  .cs-top{top:-11px;left:50%;transform:translateX(-50%)}
+  .cs-left{left:-14px;top:50%;transform:translateY(-50%) rotate(-90deg)}
+
+  /* minsize */
+  .minsize{display:flex;align-items:flex-end;gap:40px;flex-wrap:wrap;
+    border:1px solid var(--line);border-radius:var(--r-md);padding:32px;margin:18px 0;background:var(--surface)}
+  .ms-item{text-align:center}
+  .ms-item svg{height:auto}
+  .ms-item svg{color:var(--accent)}
+  .ms-item .lbl{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);margin-top:12px}
+  .ms-item .lbl b{color:var(--ink);display:block;font-size:12px}
+
+  /* do / dont */
+  .dd-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+  .dd{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--surface)}
+  .dd-head{padding:9px 16px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;display:flex;align-items:center;gap:7px;font-weight:500}
+  .dd-do .dd-head{background:rgba(70,197,215,.13);color:#0E8B9E}
+  .dd-dont .dd-head{background:rgba(255,107,53,.12);color:#D8461E}
+  .dd-body{padding:22px 18px;display:flex;align-items:center;justify-content:center;min-height:96px;background:var(--bg)}
+  .dd-body svg{width:130px;height:auto}
+  .dd-body svg{color:var(--accent)}
+  .dd-list{font-size:13px;color:var(--ink-soft);padding:14px 18px;border-top:1px solid var(--line)}
+  .dd-shadow{filter:drop-shadow(4px 6px 5px rgba(0,0,0,.4))}
+  .dd-stretch{transform:scaleX(1.5)}
+  .dd-rotate{transform:rotate(-9deg)}
+
+  /* color chips */
+  .colors{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
+  .chip{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+  .chip .swatch{height:82px}
+  .chip .meta{padding:12px 14px}
+  .chip .nm{font-size:13px;font-weight:600}
+  .chip .hx{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);margin-top:2px}
+  .chip .role{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--accent);margin-top:6px}
+
+  /* palette group */
+  .grp-label{display:flex;align-items:center;gap:10px;margin:30px 0 4px}
+  .grp-label .tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    padding:3px 9px;border-radius:999px;font-weight:500}
+  .tag-core{background:rgba(15,82,186,.12);color:var(--accent)}
+  html[data-theme="dark"] .tag-core{background:rgba(91,142,230,.16)}
+  .tag-event{background:rgba(255,107,53,.14);color:#D8461E}
+  .grp-label h3{margin:0;font-size:15px}
+  .grp-note{font-size:13px;color:var(--ink-soft);margin:2px 0 14px}
+  .chip .role.ev{color:#D8461E}
+
+  /* ratio bar */
+  .ratio{display:flex;height:52px;border-radius:var(--r-md);overflow:hidden;margin:18px 0 6px;border:1px solid var(--line)}
+  .ratio span{display:flex;align-items:center;justify-content:center;font-family:var(--mono);
+    font-size:11px;letter-spacing:.04em}
+  .ratio .r90{flex:0 0 62%;background:#fff;color:#0B1B33;border-right:1px solid var(--line)}
+  .ratio .r30{flex:0 0 28%;background:var(--sapphire);color:#fff}
+  .ratio .r10{flex:0 0 10%;background:var(--neon-orange);color:#fff}
+  .ratio-cap{display:flex;font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);margin-bottom:18px}
+  .ratio-cap span:nth-child(1){flex:0 0 62%}
+  .ratio-cap span:nth-child(2){flex:0 0 28%}
+  .ratio-cap span:nth-child(3){flex:0 0 10%}
+
+  /* core 6-col grid */
+  .colors.core5{grid-template-columns:repeat(3,1fr)}
+
+  /* event rules list */
+  .rules{margin:16px 0 6px;padding:0;list-style:none;counter-reset:r}
+  .rules li{position:relative;padding:12px 16px 12px 46px;font-size:13.5px;color:var(--ink-soft);
+    border:1px solid var(--line);border-radius:var(--r-md);margin-bottom:8px;background:var(--surface)}
+  .rules li b{color:var(--ink)}
+  .rules li::before{counter-increment:r;content:counter(r);position:absolute;left:14px;top:12px;
+    width:20px;height:20px;border-radius:6px;background:rgba(255,107,53,.14);color:#D8461E;
+    font-family:var(--mono);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center}
+
+  /* exposure ratio */
+  .expo{border:1px solid var(--line);border-radius:var(--r-md);padding:20px 22px;background:var(--surface);margin:16px 0}
+  .expo-row{display:flex;align-items:center;gap:16px;padding:10px 0}
+  .expo-row+.expo-row{border-top:1px solid var(--line)}
+  .expo-lbl{flex:0 0 120px;font-size:13px;font-weight:600;color:var(--ink)}
+  .expo-lbl span{display:block;font-family:var(--mono);font-size:10px;color:var(--ink-faint);font-weight:400;margin-top:2px}
+  .expo-bar{flex:1;height:14px;background:var(--bg-soft);border-radius:999px;overflow:hidden;position:relative}
+  .expo-bar i{position:absolute;left:0;top:0;height:100%;background:var(--neon-orange);border-radius:999px}
+  .expo-val{flex:0 0 58px;text-align:right;font-family:var(--mono);font-size:12px;color:#D8461E;font-weight:500}
+
+  /* usage do/dont mini */
+  .usage{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+  .usage .card{border:1px solid var(--line);border-radius:var(--r-md);padding:18px;background:var(--surface)}
+  .usage .u-head{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    margin-bottom:12px;display:flex;align-items:center;gap:6px}
+  .u-ok{color:#0E8B9E}.u-no{color:#D8461E}
+  .demo{border-radius:8px;padding:20px 16px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+  .demo.on-white{background:#fff;border:1px solid var(--line)}
+  .btn-core{background:var(--sapphire);color:#fff;border:none;padding:9px 18px;border-radius:8px;
+    font-family:var(--body);font-size:13px;font-weight:600}
+  .badge-ev{background:var(--neon-orange);color:#fff;font-family:var(--mono);font-size:10px;
+    padding:3px 9px;border-radius:6px;letter-spacing:.05em;font-weight:500}
+  .demo .txt{font-size:13px;color:#0B1B33}
+  .demo .txt-sm{font-size:11px;color:#5A7B96}
+  .demo.flood{background:var(--neon-orange)}
+  .demo.flood .txt,.demo.flood .txt-sm{color:#fff}
+  .demo.flood .btn-core{background:#fff;color:var(--neon-orange)}
+
+  /* typography */
+  .type-sample{border:1px solid var(--line);border-radius:var(--r-md);padding:22px 24px;margin:16px 0 28px;background:var(--surface)}
+  .type-sample .ts-face{font-family:var(--body);font-weight:800;font-size:13px;letter-spacing:.02em;
+    color:var(--ink-faint);text-transform:uppercase;font-family:var(--mono);margin-bottom:14px}
+  .accent-sample .ts-face{font-family:'Space Grotesk';text-transform:none;font-size:14px;color:var(--accent);font-weight:700}
+  .ts-row{display:flex;align-items:baseline;gap:18px;padding:10px 0;border-top:1px solid var(--line)}
+  .ts-row:first-of-type{border-top:none}
+  .ts-w{flex:0 0 108px;font-family:var(--mono);font-size:10.5px;color:var(--ink-faint)}
+  .ts-txt{color:var(--ink);font-size:16px}
+
+  .scale{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;margin:16px 0}
+  .scale-row{display:flex;align-items:center;gap:20px;padding:14px 20px;border-top:1px solid var(--line)}
+  .scale-row:first-child{border-top:none}
+  .sc-tag{flex:0 0 64px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--accent);font-weight:600}
+  .sc-demo{flex:1;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sc-meta{flex:0 0 auto;font-family:var(--mono);font-size:10.5px;color:var(--ink-faint)}
+
+  .scale-mobile{background:var(--bg-soft)}
+
+  /* components: button */
+  .btn-lab{border:1px solid var(--line);border-radius:var(--r-md);padding:24px;background:var(--surface);margin:14px 0}
+  .btn-row{display:flex;align-items:center;gap:18px;padding:12px 0;border-top:1px solid var(--line)}
+  .btn-row:first-child{border-top:none}
+  .bt{font-family:var(--body);font-size:14px;font-weight:600;padding:11px 24px;border-radius:9px;cursor:pointer;transition:.15s}
+  .bt-primary{background:var(--sapphire);color:#fff;border:none}
+  .bt-primary:hover{background:#0C4499}
+  .bt-secondary{background:var(--ice);color:var(--deep-navy);border:none}
+  .bt-ghost{background:transparent;color:var(--sapphire);border:1.5px solid var(--sapphire)}
+  .bt-disabled{background:var(--bg-soft);color:var(--ink-faint);border:1px solid var(--line);cursor:not-allowed}
+  .bt-tag{font-family:var(--mono);font-size:11px;color:var(--ink-faint)}
+
+  /* components: badge */
+  .badge-lab{border:1px solid var(--line);border-radius:var(--r-md);padding:24px;background:var(--surface);margin:14px 0}
+  .badge-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--line)}
+  .badge-row:first-child{border-top:none}
+  .bd{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.03em;padding:4px 10px;border-radius:6px}
+  .bd-info{background:rgba(166,197,216,.35);color:var(--sapphire)}
+  html[data-theme="dark"] .bd-info{background:rgba(166,197,216,.18);color:#9CC4E8}
+  .bd-play{background:var(--neon-orange);color:#fff}
+  .bd-lp{background:transparent;color:var(--neon-orange);border:1px solid var(--neon-orange)}
+  .bd-soldout{background:var(--deep-navy);color:#fff}
+  .bd-new{background:transparent;color:var(--deep-navy);border:1px solid var(--line-strong)}
+  html[data-theme="dark"] .bd-new{color:var(--ink-soft)}
+  .badge-row .bt-tag{margin-left:4px}
+
+  /* spacing */
+  .space-scale{border:1px solid var(--line);border-radius:var(--r-md);padding:22px 24px;background:var(--surface);margin:16px 0}
+  .sp-row{display:flex;align-items:center;gap:16px;padding:9px 0;border-top:1px solid var(--line)}
+  .sp-row:first-child{border-top:none}
+  .sp-tag{flex:0 0 26px;font-family:var(--mono);font-size:11px;color:var(--ink-faint);text-align:right}
+  .sp-bar{height:14px;background:var(--sapphire);border-radius:3px;flex-shrink:0}
+  .sp-name{font-size:13px;color:var(--ink-soft)}
+
+  .kv-list{list-style:none;padding:0}
+  .kv-list li{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid var(--line);font-size:13px}
+  .kv-list li:first-child{border-top:none}
+  .kv-list li b{color:var(--ink);font-weight:500}
+  .kv-list li span{font-family:var(--mono);color:var(--ink-faint);font-size:12px}
+
+  /* iconography */
+  .icon-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin:16px 0}
+  .icon-card{border:1px solid var(--line);border-radius:var(--r-md);padding:18px 8px;display:flex;flex-direction:column;
+    align-items:center;gap:10px;background:var(--surface)}
+  .icon-card svg{width:26px;height:26px;stroke:var(--ink);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+  .icon-card span{font-size:10.5px;color:var(--ink-faint);text-align:center;line-height:1.4}
+
+  /* form & input */
+  .form-lab{border:1px solid var(--line);border-radius:var(--r-md);padding:26px;background:var(--surface);margin:16px 0;
+    display:flex;flex-direction:column;gap:20px}
+  .f-group{display:flex;flex-direction:column;gap:7px;max-width:340px}
+  .f-label{font-size:12.5px;font-weight:600;color:var(--ink)}
+  .f-label-err{color:#D8323A}
+  .f-input{font-family:var(--body);font-size:14px;padding:10px 14px;border-radius:8px;border:1.5px solid var(--line-strong);
+    background:var(--bg);color:var(--ink);outline:none}
+  .f-input::placeholder{color:var(--ink-faint)}
+  .f-focus{border-color:var(--sapphire);box-shadow:0 0 0 3px rgba(15,82,186,.15)}
+  .f-error{border-color:#E5484D;box-shadow:0 0 0 3px rgba(229,72,77,.12)}
+  .f-disabled{background:var(--bg-soft);color:var(--ink-faint);cursor:not-allowed}
+  .f-help{font-family:var(--mono);font-size:11px}
+  .f-help-err{color:#D8323A}
+  .f-search{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line-strong);border-radius:999px;
+    padding:9px 16px;max-width:340px;background:var(--bg)}
+  .f-search svg{stroke:var(--ink-faint);fill:none;stroke-width:1.75;stroke-linecap:round;flex-shrink:0}
+  .f-search input{border:none;outline:none;background:transparent;font-family:var(--body);font-size:13.5px;
+    color:var(--ink);width:100%}
+  .f-choices{display:flex;flex-direction:column;gap:10px}
+  .f-check,.f-radio{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-soft);cursor:pointer}
+  .f-check input,.f-radio input{accent-color:var(--sapphire);width:16px;height:16px}
+
+  @media(max-width:920px){
+    .icon-grid{grid-template-columns:repeat(3,1fr)}
+  }
+
+  /* voice & tone */
+  .vt-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+  .vt-card{border:1px solid var(--line);border-radius:var(--r-md);padding:20px;background:var(--surface)}
+  .vt-head{margin-bottom:12px}
+  .vt-where{font-family:var(--mono);font-size:10.5px;letter-spacing:.02em;color:var(--ink-faint);
+    line-height:1.7;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .vt-do{font-size:13.5px;color:var(--ink-soft);margin-bottom:14px}
+  .vt-ex{font-size:13px;border-radius:8px;padding:12px 14px;line-height:1.55}
+  .vt-ex-ok{background:rgba(15,82,186,.07);color:var(--ink);border-left:3px solid var(--sapphire)}
+  html[data-theme="dark"] .vt-ex-ok{background:rgba(91,142,230,.1)}
+  .vt-ex-play{background:rgba(255,107,53,.08);color:var(--ink);border-left:3px solid var(--neon-orange)}
+
+  .footnote{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+
+  @media(max-width:920px){
+    .sidebar{display:none}
+    main{margin-left:0;padding:64px 22px 90px}
+    .panel-row,.dd-grid,.colors{grid-template-columns:1fr}
+    .colors{grid-template-columns:1fr 1fr}
+    h1.page{font-size:34px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- Reusable logo symbol -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="vivoir" viewBox="0 0 2235 395">
+    <path fill="currentColor" d="M57.25,0c11.63,0,22.35,6.31,27.99,16.49l147.3,265.81,8.81,16.11c4.17,7.63,15.13,7.63,19.3,0l8.87-16.23L416.76,16.49c5.64-10.18,16.36-16.49,27.99-16.49h45.26c9.09,0,14.87,9.73,10.51,17.7l-184.73,337.89c-27.99,51.2-101.58,51.2-129.57,0L1.48,17.7C-2.81,9.85,2.72.3,11.56,0h.42s45.26,0,45.26,0Z"/>
+    <path fill="currentColor" d="M729.25,0c11.63,0,22.35,6.31,27.99,16.49l147.3,265.81,8.81,16.11c4.17,7.63,15.13,7.63,19.3,0l8.87-16.23L1088.76,16.49c5.64-10.18,16.36-16.49,27.99-16.49h45.26c9.09,0,14.87,9.73,10.51,17.7l-184.74,337.89c-27.99,51.2-101.58,51.2-129.57,0L673.48,17.7c-4.29-7.85,1.24-17.4,10.08-17.69h.42s45.26,0,45.26,0Z"/>
+    <path fill="currentColor" d="M544,28c0-13.2,0-19.8,4.1-23.9,4.1-4.1,10.7-4.1,23.9-4.1h30c13.2,0,19.8,0,23.9,4.1,4.1,4.1,4.1,10.7,4.1,23.9v24c0,13.2,0,19.8-4.1,23.9-4.1,4.1-10.7,4.1-23.9,4.1h-30c-13.2,0-19.8,0-23.9-4.1-4.1-4.1-4.1-10.7-4.1-23.9v-24Z"/>
+    <path fill="currentColor" d="M1725,28c0-13.2,0-19.8,4.1-23.9,4.1-4.1,10.7-4.1,23.9-4.1h30c13.2,0,19.8,0,23.9,4.1,4.1,4.1,4.1,10.7,4.1,23.9v24c0,13.2,0,19.8-4.1,23.9-4.1,4.1-10.7,4.1-23.9,4.1h-30c-13.2,0-19.8,0-23.9-4.1-4.1-4.1-4.1-10.7-4.1-23.9v-24Z"/>
+    <path fill="currentColor" d="M544,146c0-13.2,0-19.8,4.1-23.9,4.1-4.1,10.7-4.1,23.9-4.1h30c13.2,0,19.8,0,23.9,4.1,4.1,4.1,4.1,10.7,4.1,23.9v220c0,13.2,0,19.8-4.1,23.9-4.1,4.1-10.7,4.1-23.9,4.1h-30c-13.2,0-19.8,0-23.9-4.1-4.1-4.1-4.1-10.7-4.1-23.9v-220Z"/>
+    <path fill="currentColor" d="M1725,146c0-13.2,0-19.8,4.1-23.9,4.1-4.1,10.7-4.1,23.9-4.1h30c13.2,0,19.8,0,23.9,4.1,4.1,4.1,4.1,10.7,4.1,23.9v220c0,13.2,0,19.8-4.1,23.9-4.1,4.1-10.7,4.1-23.9,4.1h-30c-13.2,0-19.8,0-23.9-4.1-4.1-4.1-4.1-10.7-4.1-23.9v-220Z"/>
+    <path fill="currentColor" d="M1648.08,62.05c-10.94-19.85-27.29-36.19-47.13-47.13-27.06-14.92-63.02-14.92-134.95-14.92h-87.07c-63.32.06-96.52.93-121.88,14.92-19.84,10.94-36.19,27.29-47.13,47.13-14.92,27.05-14.92,63.02-14.92,134.95s0,107.89,14.92,134.95l.52.93c10.93,19.43,27.08,35.43,46.61,46.21l1.28.69c25.2,13.33,58.34,14.17,120.6,14.23h13.07s74,0,74,0c70.81,0,106.76,0,133.67-14.23l1.28-.69c19.53-10.77,35.68-26.78,46.61-46.21l.52-.93c14.92-27.05,14.92-63.02,14.92-134.95s0-107.89-14.92-134.95ZM1581.44,274.35c-.7,7.95-1.57,12.73-2.29,15.61-.35,1.37-.64,2.21-.81,2.66-.17.43-.28.63-.31.7-3.65,6.62-9.1,12.06-15.71,15.71-.07.04-.27.14-.7.31-.45.17-1.29.46-2.66.81-2.88.73-7.66,1.6-15.61,2.29-17.08,1.49-39.97,1.56-77.35,1.56h-74c-37.38,0-60.27-.07-77.35-1.56-7.95-.69-12.73-1.56-15.61-2.29-1.37-.35-2.21-.64-2.66-.81-.43-.17-.63-.27-.7-.31-6.61-3.65-12.06-9.09-15.71-15.71-.03-.07-.14-.26-.31-.7-.17-.45-.46-1.29-.81-2.66-.72-2.88-1.59-7.66-2.29-15.61-1.49-17.08-1.56-39.97-1.56-77.35s.07-60.27,1.56-77.35c.7-7.95,1.57-12.73,2.29-15.61.35-1.37.64-2.21.81-2.66.17-.43.28-.63.31-.7,3.65-6.62,9.1-12.06,15.71-15.71.07-.04.27-.14.7-.31.45-.17,1.29-.46,2.66-.81,2.88-.73,7.66-1.6,15.61-2.29,17.08-1.49,39.97-1.56,77.35-1.56h74c37.38,0,60.27.07,77.35,1.56,7.95.69,12.73,1.56,15.61,2.29,1.37.35,2.21.64,2.66.81.43.17.63.27.7.31,6.61,3.65,12.06,9.1,15.71,15.71.03.07.14.26.31.7.17.45.46,1.29.81,2.66.72,2.88,1.59,7.66,2.29,15.61,1.49,17.08,1.56,39.97,1.56,77.35s-.07,60.27-1.56,77.35Z"/>
+    <path fill="currentColor" d="M2235,62.16c0,13.23,0,19.85-4.09,23.96-4.09,4.11-10.67,4.11-23.83,4.11h-164.55c-37.61,0-56.41,0-68.09,11.75-11.69,11.75-11.69,30.65-11.69,68.46v196.5c0,13.23,0,19.85-4.09,23.96-4.09,4.11-10.67,4.11-23.83,4.11h-33.91c-13.16,0-19.74,0-23.83-4.11-4.09-4.11-4.09-10.73-4.09-23.96v-146.37c0-103.97,0-155.96,32.13-188.26C1937.26,0,1988.97,0,2092.39,0h114.69c13.16,0,19.74,0,23.83,4.11,4.09,4.11,4.09,10.73,4.09,23.96v34.09Z"/>
+  </symbol>
+<symbol id="vivoir-outline" viewBox="0 0 2235 395">
+    <path d="M57.25,0c11.63,0,22.35,6.31,27.99,16.49l147.3,265.81,8.81,16.11c4.17,7.63,15.13,7.63,19.3,0l8.87-16.23L416.76,16.49c5.64-10.18,16.36-16.49,27.99-16.49h45.26c9.09,0,14.87,9.73,10.51,17.7l-184.73,337.89c-27.99,51.2-101.58,51.2-129.57,0L1.48,17.7C-2.81,9.85,2.72.3,11.56,0h.42s45.26,0,45.26,0Z"/>
+    <path d="M729.25,0c11.63,0,22.35,6.31,27.99,16.49l147.3,265.81,8.81,16.11c4.17,7.63,15.13,7.63,19.3,0l8.87-16.23L1088.76,16.49c5.64-10.18,16.36-16.49,27.99-16.49h45.26c9.09,0,14.87,9.73,10.51,17.7l-184.74,337.89c-27.99,51.2-101.58,51.2-129.57,0L673.48,17.7c-4.29-7.85,1.24-17.4,10.08-17.69h.42s45.26,0,45.26,0Z"/>
+    <path d="M544,28c0-13.2,0-19.8,4.1-23.9,4.1-4.1,10.7-4.1,23.9-4.1h30c13.2,0,19.8,0,23.9,4.1,4.1,4.1,4.1,10.7,4.1,23.9v24c0,13.2,0,19.8-4.1,23.9-4.1,4.1-10.7,4.1-23.9,4.1h-30c-13.2,0-19.8,0-23.9-4.1-4.1-4.1-4.1-10.7-4.1-23.9v-24Z"/>
+    <path d="M1725,28c0-13.2,0-19.8,4.1-23.9,4.1-4.1,10.7-4.1,23.9-4.1h30c13.2,0,19.8,0,23.9,4.1,4.1,4.1,4.1,10.7,4.1,23.9v24c0,13.2,0,19.8-4.1,23.9-4.1,4.1-10.7,4.1-23.9,4.1h-30c-13.2,0-19.8,0-23.9-4.1-4.1-4.1-4.1-10.7-4.1-23.9v-24Z"/>
+    <path d="M544,146c0-13.2,0-19.8,4.1-23.9,4.1-4.1,10.7-4.1,23.9-4.1h30c13.2,0,19.8,0,23.9,4.1,4.1,4.1,4.1,10.7,4.1,23.9v220c0,13.2,0,19.8-4.1,23.9-4.1,4.1-10.7,4.1-23.9,4.1h-30c-13.2,0-19.8,0-23.9-4.1-4.1-4.1-4.1-10.7-4.1-23.9v-220Z"/>
+    <path d="M1725,146c0-13.2,0-19.8,4.1-23.9,4.1-4.1,10.7-4.1,23.9-4.1h30c13.2,0,19.8,0,23.9,4.1,4.1,4.1,4.1,10.7,4.1,23.9v220c0,13.2,0,19.8-4.1,23.9-4.1,4.1-10.7,4.1-23.9,4.1h-30c-13.2,0-19.8,0-23.9-4.1-4.1-4.1-4.1-10.7-4.1-23.9v-220Z"/>
+    <path d="M1648.08,62.05c-10.94-19.85-27.29-36.19-47.13-47.13-27.06-14.92-63.02-14.92-134.95-14.92h-87.07c-63.32.06-96.52.93-121.88,14.92-19.84,10.94-36.19,27.29-47.13,47.13-14.92,27.05-14.92,63.02-14.92,134.95s0,107.89,14.92,134.95l.52.93c10.93,19.43,27.08,35.43,46.61,46.21l1.28.69c25.2,13.33,58.34,14.17,120.6,14.23h13.07s74,0,74,0c70.81,0,106.76,0,133.67-14.23l1.28-.69c19.53-10.77,35.68-26.78,46.61-46.21l.52-.93c14.92-27.05,14.92-63.02,14.92-134.95s0-107.89-14.92-134.95ZM1581.44,274.35c-.7,7.95-1.57,12.73-2.29,15.61-.35,1.37-.64,2.21-.81,2.66-.17.43-.28.63-.31.7-3.65,6.62-9.1,12.06-15.71,15.71-.07.04-.27.14-.7.31-.45.17-1.29.46-2.66.81-2.88.73-7.66,1.6-15.61,2.29-17.08,1.49-39.97,1.56-77.35,1.56h-74c-37.38,0-60.27-.07-77.35-1.56-7.95-.69-12.73-1.56-15.61-2.29-1.37-.35-2.21-.64-2.66-.81-.43-.17-.63-.27-.7-.31-6.61-3.65-12.06-9.09-15.71-15.71-.03-.07-.14-.26-.31-.7-.17-.45-.46-1.29-.81-2.66-.72-2.88-1.59-7.66-2.29-15.61-1.49-17.08-1.56-39.97-1.56-77.35s.07-60.27,1.56-77.35c.7-7.95,1.57-12.73,2.29-15.61.35-1.37.64-2.21.81-2.66.17-.43.28-.63.31-.7,3.65-6.62,9.1-12.06,15.71-15.71.07-.04.27-.14.7-.31.45-.17,1.29-.46,2.66-.81,2.88-.73,7.66-1.6,15.61-2.29,17.08-1.49,39.97-1.56,77.35-1.56h74c37.38,0,60.27.07,77.35,1.56,7.95.69,12.73,1.56,15.61,2.29,1.37.35,2.21.64,2.66.81.43.17.63.27.7.31,6.61,3.65,12.06,9.1,15.71,15.71.03.07.14.26.31.7.17.45.46,1.29.81,2.66.72,2.88,1.59,7.66,2.29,15.61,1.49,17.08,1.56,39.97,1.56,77.35s-.07,60.27-1.56,77.35Z"/>
+    <path d="M2235,62.16c0,13.23,0,19.85-4.09,23.96-4.09,4.11-10.67,4.11-23.83,4.11h-164.55c-37.61,0-56.41,0-68.09,11.75-11.69,11.75-11.69,30.65-11.69,68.46v196.5c0,13.23,0,19.85-4.09,23.96-4.09,4.11-10.67,4.11-23.83,4.11h-33.91c-13.16,0-19.74,0-23.83-4.11-4.09-4.11-4.09-10.73-4.09-23.96v-146.37c0-103.97,0-155.96,32.13-188.26C1937.26,0,1988.97,0,2092.39,0h114.69c13.16,0,19.74,0,23.83,4.11,4.09,4.11,4.09,10.73,4.09,23.96v34.09Z"/>
+  </symbol>
+</svg>
+
+<button class="toggle" id="themeToggle">◐ 다크 모드</button>
+
+<aside class="sidebar">
+  <div class="sb-logo"><svg viewBox="0 0 2235 395"><use href="#vivoir"/></svg></div>
+  <div class="sb-sub">Design System · V1</div>
+
+  <div class="sb-group">
+    <h4>Overview</h4>
+    <a href="#top" class="jump active">Brand Identity</a>
+    <a class="wip">Brand Concept<span class="wip-badge">개발중</span></a>
+  </div>
+  <div class="sb-group">
+    <h4>Foundations</h4>
+    <a href="#logo" class="jump">Logo</a>
+    <a href="#color" class="jump">Color</a>
+    <a href="#typography" class="jump">Typography</a>
+    <a href="#spacing" class="jump">Spacing</a>
+    <a href="#icon" class="jump">Iconography</a>
+  </div>
+  <div class="sb-group">
+    <h4>Components</h4>
+    <a href="#c-button" class="jump">Button</a>
+    <a href="#c-badge" class="jump">Badge & Label</a>
+    <a href="#c-form" class="jump">Form & Input</a>
+  </div>
+  <div class="sb-group">
+    <h4>Guidelines</h4>
+    <a href="#voice" class="jump">Voice & Tone</a>
+    <a class="wip">Photography<span class="wip-badge">개발중</span></a>
+    <a href="#dont" class="jump">Do / Don't</a>
+  </div>
+</aside>
+
+<main>
+<div class="wrap" id="top">
+
+  <svg class="hero-mark" viewBox="0 0 2235 395"><use href="#vivoir"/></svg>
+  <div class="eyebrow">Vivoir Play Lab · Design System</div>
+  <h1 class="page">쉽게, 즐겁게,<br>비브아답게.</h1>
+  <p class="lead">비브아의 디자인 시스템입니다. <b>Clean White</b> 위에 <b>Sapphire</b>의 신뢰를 얹고, 이미지에서만 <b>Neon Energy</b>로 놀이의 반전을 더합니다. "기술은 진지하게 증명하고, 태도는 유쾌하게 말한다" — 이 균형이 모든 규정의 기준입니다.</p>
+
+  <div class="callout">
+    로고는 소문자 워드마크 <b>vivoir</b> 하나만 사용합니다. 충분한 여백(로고 높이의 <b>50% 이상</b>)을 두고, 색은 <b>Sapphire(라이트)</b> · <b>화이트(다크·컬러 배경)</b>로만 반전합니다. 임의로 늘이거나 그림자·외곽선을 더하지 않습니다.
+  </div>
+
+  <!-- ============ LOGO ============ -->
+  <section id="logo">
+    <h2><span class="n">01</span> Logo</h2>
+    <p class="sec-desc">두 개의 뾰족한 <b>∨</b>은 실험실 비커이자, 아래로 향하는 이완의 방향입니다. 워드마크는 언제나 이 원형(原形)을 그대로 사용하며, 아래 규정을 벗어나지 않습니다.</p>
+
+    <h3>배경별 버전</h3>
+    <div class="panel-row">
+      <div class="panel p-white"><span class="cap">On White</span><svg viewBox="0 0 2235 395"><use href="#vivoir"/></svg></div>
+      <div class="panel p-sapphire"><span class="cap">On Sapphire</span><svg viewBox="0 0 2235 395"><use href="#vivoir"/></svg></div>
+      <div class="panel p-navy"><span class="cap">On Deep Navy</span><svg viewBox="0 0 2235 395"><use href="#vivoir"/></svg></div>
+      <div class="panel p-ice"><span class="cap">On Ice Blue</span><svg viewBox="0 0 2235 395"><use href="#vivoir"/></svg></div>
+    </div>
+    <div class="callout">밝은 배경에는 <b>Sapphire #0F52BA</b>, 어둡거나 컬러가 강한 배경에는 <b>White</b>만 사용합니다. 그 외 색상 착색은 금지합니다.</div>
+
+    <h3>보호 여백 (Clear Space)</h3>
+    <div class="clearspace">
+      <div class="cs-box" style="--pad:38px">
+        <span class="cs-guide cs-top">≥ x</span>
+        <span class="cs-guide cs-left">≥ x</span>
+        <svg viewBox="0 0 2235 395"><use href="#vivoir"/></svg>
+      </div>
+    </div>
+    <p class="sec-desc" style="margin-top:-6px"><b>x = 로고 높이의 50%</b>. 이 여백 안에는 다른 텍스트·그래픽·이미지 요소를 두지 않습니다.</p>
+
+    <h3>최소 크기</h3>
+    <div class="minsize">
+      <div class="ms-item">
+        <svg viewBox="0 0 2235 395" style="width:160px"><use href="#vivoir"/></svg>
+        <div class="lbl"><b>Web · 최소 88px</b>너비 기준</div>
+      </div>
+      <div class="ms-item">
+        <svg viewBox="0 0 2235 395" style="width:96px"><use href="#vivoir"/></svg>
+        <div class="lbl"><b>Print · 최소 20mm</b>너비 기준</div>
+      </div>
+    </div>
+    <p class="sec-desc" style="margin-top:-6px">이보다 작아지면 두 <b>∨</b>의 형태가 뭉개지므로, 최소 크기 이하로는 사용하지 않습니다.</p>
+  </section>
+
+  <!-- ============ DONT ============ -->
+  <section id="dont">
+    <h2><span class="n">02</span> Do / Don't</h2>
+    <p class="sec-desc">놀이 브랜드라도 로고만은 규칙에 예외를 두지 않습니다. 아래는 절대 금지입니다.</p>
+    <div class="dd-grid">
+      <div class="dd dd-dont">
+        <div class="dd-head">✕ 그림자 금지</div>
+        <div class="dd-body"><svg class="dd-shadow" viewBox="0 0 2235 395"><use href="#vivoir"/></svg></div>
+        <div class="dd-list">드롭섀도·글로우 등 입체 효과를 더하지 않습니다.</div>
+      </div>
+      <div class="dd dd-dont">
+        <div class="dd-head">✕ 왜곡 금지</div>
+        <div class="dd-body"><svg class="dd-stretch" viewBox="0 0 2235 395"><use href="#vivoir"/></svg></div>
+        <div class="dd-list">가로·세로 비율(5.66:1)을 임의로 늘이거나 줄이지 않습니다.</div>
+      </div>
+      <div class="dd dd-dont">
+        <div class="dd-head">✕ 회전 금지</div>
+        <div class="dd-body"><svg class="dd-rotate" viewBox="0 0 2235 395"><use href="#vivoir"/></svg></div>
+        <div class="dd-list">기울이거나 회전하지 않습니다. 항상 수평 정렬합니다.</div>
+      </div>
+      <div class="dd dd-dont">
+        <div class="dd-head">✕ 외곽선 금지</div>
+        <div class="dd-body"><svg viewBox="0 0 2235 395" style="width:130px" fill="none" stroke="var(--accent)" stroke-width="8"><use href="#vivoir-outline"/></svg></div>
+        <div class="dd-list">면(fill)을 비우고 선으로만 처리하지 않습니다.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COLOR ============ -->
+  <section id="color">
+    <h2><span class="n">03</span> Color</h2>
+    <p class="sec-desc">비브아의 기본 인상은 <b>깨끗한 연구소</b>, <b>신뢰감 있는 블루</b>, 그리고 <b>아주 작은 Play 에너지</b>입니다. 색은 <b>Core</b>(상시)와 <b>Event</b>(반전)로 나뉘며, 이 기준은 앞으로 출시하는 모든 상세페이지·배너·썸네일·상품 카드·UI 문구에 동일하게 적용합니다.</p>
+
+    <!-- ===== CORE ===== -->
+    <div class="grp-label"><span class="tag tag-core">Core Color</span><h3>상시 팔레트</h3></div>
+    <div class="grp-note">모든 <b>상시 화면</b>의 기본입니다. 자사몰 · 상품 상세 · 상품 리스트 · 브랜드 소개 · CS 안내 · 스펙 안내 · 구매 안내 — 이 영역은 Core Color만으로 구성합니다.</div>
+    <div class="colors core5">
+      <div class="chip"><div class="swatch" style="background:#FFFFFF;border-bottom:1px solid var(--line)"></div><div class="meta"><div class="nm">White</div><div class="hx">#FFFFFF</div><div class="role">기본 배경</div></div></div>
+      <div class="chip"><div class="swatch" style="background:#D6E6F3"></div><div class="meta"><div class="nm">Ice Blue</div><div class="hx">#D6E6F3</div><div class="role">부드러운 섹션 배경</div></div></div>
+      <div class="chip"><div class="swatch" style="background:#A6C5D8"></div><div class="meta"><div class="nm">Soft Powder Blue</div><div class="hx">#A6C5D8</div><div class="role">보조 배경 · 카드 · 라인</div></div></div>
+      <div class="chip"><div class="swatch" style="background:#0F52BA"></div><div class="meta"><div class="nm">Sapphire</div><div class="hx">#0F52BA</div><div class="role">메인 · 버튼 · 핵심 포인트</div></div></div>
+      <div class="chip"><div class="swatch" style="background:#000926"></div><div class="meta"><div class="nm">Deep Navy</div><div class="hx">#000926</div><div class="role">제목 · 본문 강조 · 진한 배경</div></div></div>
+    </div>
+
+    <!-- ===== EVENT ===== -->
+    <div class="grp-label"><span class="tag tag-event">Event Color</span><h3>Play Lab 반전 에너지</h3></div>
+    <div class="grp-note">Play Lab의 장난기를 담는 색입니다. <b>상시 상품 상세페이지에서는 메인 컬러로 사용하지 않습니다.</b></div>
+    <div class="colors">
+      <div class="chip"><div class="swatch" style="background:#FF6B35"></div><div class="meta"><div class="nm">Neon Orange</div><div class="hx">#FF6B35</div><div class="role ev">신호 · 배지 · 포인트</div></div></div>
+      <div class="chip"><div class="swatch" style="background:#FFBF00"></div><div class="meta"><div class="nm">Yellow</div><div class="hx">#FFBF00</div><div class="role ev">보조 포인트 (제한적)</div></div></div>
+    </div>
+
+    <!-- ===== EVENT RULES ===== -->
+    <h3>Event Color 사용 규칙</h3>
+    <ol class="rules">
+      <li><b>배경 면 금지.</b> 상시 상품 상세페이지에서 Orange·Yellow를 배경 면으로 사용하지 않습니다.</li>
+      <li><b>CTA는 Sapphire.</b> 구매·상담 등 CTA 버튼은 언제나 Sapphire를 기본으로 합니다.</li>
+      <li><b>제목·설명·스펙 제외.</b> 섹션 제목, 제품 핵심 설명, 스펙 안내에는 Orange를 쓰지 않습니다.</li>
+      <li><b>점으로만.</b> Orange는 작은 배지 · 점 · 아이콘 · 에너지 게이지 끝점 · LP 코드 · PLAY 라벨 정도로만 사용합니다.</li>
+      <li><b>PDP 0–3%.</b> 상시 상품 상세페이지에서 Orange 노출 비율은 0~3%로 제한합니다.</li>
+      <li><b>이벤트 5–10%.</b> 프로모션 배너 · 캠페인 · 패키지 내부 · SNS 이벤트에서는 5~10%까지 허용합니다.</li>
+      <li><b>Yellow는 더 제한적.</b> Orange보다 적게, 단독 사용보다 보조 포인트로만 씁니다.</li>
+    </ol>
+
+    <!-- ===== EXPOSURE RATIO ===== -->
+    <h3>Orange 노출 비율</h3>
+    <div class="expo">
+      <div class="expo-row">
+        <div class="expo-lbl">상시 PDP<span>상품 상세·리스트</span></div>
+        <div class="expo-bar"><i style="width:3%"></i></div>
+        <div class="expo-val">0–3%</div>
+      </div>
+      <div class="expo-row">
+        <div class="expo-lbl">이벤트<span>배너·캠페인·SNS</span></div>
+        <div class="expo-bar"><i style="width:10%"></i></div>
+        <div class="expo-val">5–10%</div>
+      </div>
+    </div>
+
+    <!-- ===== DO / DONT ===== -->
+    <h3>적용 예시</h3>
+    <div class="usage">
+      <div class="card">
+        <div class="u-head u-ok">✓ 올바른 사용 — 상시 PDP</div>
+        <div class="demo on-white">
+          <span class="badge-ev">PLAY · LP-0427</span>
+          <div class="txt">비브아 미니 포켓 마사지건</div>
+          <div class="txt-sm">전문가의 손길, 손바닥 안에</div>
+          <button class="btn-core">구매하기</button>
+        </div>
+        <div class="grp-note" style="margin:12px 0 0">Blue·White가 먼저 보이고, Orange는 작은 PLAY 라벨로 나중에 발견됨. CTA는 Sapphire.</div>
+      </div>
+      <div class="card">
+        <div class="u-head u-no">✕ 잘못된 사용 — 과한 Orange</div>
+        <div class="demo flood">
+          <span class="badge-ev" style="background:#fff;color:var(--neon-orange)">SALE</span>
+          <div class="txt">비브아 미니 포켓 마사지건</div>
+          <div class="txt-sm">전문가의 손길, 손바닥 안에</div>
+          <button class="btn-core" style="background:#fff;color:var(--neon-orange)">구매하기</button>
+        </div>
+        <div class="grp-note" style="margin:12px 0 0">Orange가 배경 면·CTA를 덮음. Orange가 먼저 보이면 과한 것.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>전체 원칙</b><br>
+      기본은 연구소의 신뢰감입니다. Play Lab의 장난기는 작게 보여줍니다. Orange는 고객의 시선을 잠깐 잡는 <b>신호</b>로만 씁니다. <b>Blue와 White가 먼저 보이고, Orange는 나중에 발견되는 정도</b>가 좋습니다 — Orange가 먼저 보이면 과한 것입니다.
+    </div>
+  </section>
+
+  <!-- ============ TYPOGRAPHY ============ -->
+  <section id="typography">
+    <h2><span class="n">04</span> Typography</h2>
+    <p class="sec-desc">구매자가 실제로 읽는 글자는 <b>전부 한글</b>입니다. 그래서 정보를 전달하는 모든 곳은 <b>Pretendard</b> 하나로 통일하고, 지오메트릭한 <b>Space Grotesk</b>는 로고 옆에 붙는 영문 브랜드 요소에만 씁니다. 컬러의 Core/Event 원칙과 같은 구조입니다 — <b>가독성이 기본, 브랜드 향은 포인트로만.</b></p>
+
+    <div class="grp-label"><span class="tag tag-core">Core</span><h3>Pretendard — 읽는 모든 것</h3></div>
+    <div class="grp-note">페이지 제목 · 상품명 · 설명 · 본문 · 버튼 · UI 문구 · 숫자. 한글이 하나라도 섞이면 예외 없이 Pretendard입니다.</div>
+    <div class="type-sample core-sample">
+      <div class="ts-face">Pretendard</div>
+      <div class="ts-row"><span class="ts-w">ExtraBold 800</span><span class="ts-txt" style="font-weight:800">굳은 어깨, 15분이면 리셋</span></div>
+      <div class="ts-row"><span class="ts-w">Bold 700</span><span class="ts-txt" style="font-weight:700">쉽게, 즐겁게, 비브아답게</span></div>
+      <div class="ts-row"><span class="ts-w">SemiBold 600</span><span class="ts-txt" style="font-weight:600">비브아 미니 포켓 마사지건</span></div>
+      <div class="ts-row"><span class="ts-w">Regular 400</span><span class="ts-txt" style="font-weight:400">손바닥에 쏙 들어오는 미니 포켓 마사지건. 사무실에서, 여행지에서.</span></div>
+    </div>
+
+    <div class="grp-label"><span class="tag tag-event">Accent</span><h3>Space Grotesk — 브랜드 향, 영문 전용</h3></div>
+    <div class="grp-note">로고 곁 태그라인 · "PLAY LAB" 워드마크 · LP 코드 · 섹션 이거브로우 등 <b>순수 영문 요소</b>에서만 사용. 한글과 절대 같은 문장에 섞지 않습니다.</div>
+    <div class="type-sample accent-sample">
+      <div class="ts-face" style="font-family:'Space Grotesk'">Space Grotesk</div>
+      <div class="ts-row"><span class="ts-w">Bold 700</span><span class="ts-txt" style="font-family:'Space Grotesk';font-weight:700">VIVOIR PLAY LAB</span></div>
+      <div class="ts-row"><span class="ts-w">Medium 500</span><span class="ts-txt" style="font-family:'Space Grotesk';font-weight:500">PLAY EASY, FEEL GOOD.</span></div>
+      <div class="ts-row"><span class="ts-w">Mono label</span><span class="ts-txt" style="font-family:'JetBrains Mono';font-size:12px;letter-spacing:.06em">LP-0427 · V-01 PROJECT</span></div>
+    </div>
+
+    <h3>타입 스케일</h3>
+    <div class="scale">
+      <div class="scale-row"><span class="sc-tag">Display</span><span class="sc-demo" style="font-size:40px;font-weight:800">쉽게, 즐겁게</span><span class="sc-meta">40 / 800 / -1%</span></div>
+      <div class="scale-row"><span class="sc-tag">H1</span><span class="sc-demo" style="font-size:30px;font-weight:700">상품 상세 타이틀</span><span class="sc-meta">30 / 700 / -1%</span></div>
+      <div class="scale-row"><span class="sc-tag">H2</span><span class="sc-demo" style="font-size:22px;font-weight:600">섹션 제목</span><span class="sc-meta">22 / 600 / -0.5%</span></div>
+      <div class="scale-row"><span class="sc-tag">H3</span><span class="sc-demo" style="font-size:17px;font-weight:600">카드 · 소제목</span><span class="sc-meta">17 / 600 / 0%</span></div>
+      <div class="scale-row"><span class="sc-tag">Body</span><span class="sc-demo" style="font-size:15px;font-weight:400">본문, 상품 설명, 안내 문구</span><span class="sc-meta">15 / 400 / lh 1.7</span></div>
+      <div class="scale-row"><span class="sc-tag">Caption</span><span class="sc-demo" style="font-size:12px;font-weight:500;color:var(--ink-faint)">보조 설명 · 캡션 · 라벨</span><span class="sc-meta">12 / 500 / lh 1.5</span></div>
+    </div>
+    <p class="sec-desc" style="margin-top:-4px">한글은 라틴 대비 행간이 좁아 보이므로, 본문은 <b>줄간격 1.6~1.7</b>로 여유 있게 둡니다.</p>
+
+    <h3>모바일 스케일 <span style="font-family:var(--mono);font-size:11px;color:var(--ink-faint);font-weight:400">— 구매자 대부분이 보는 화면</span></h3>
+    <p class="sec-desc" style="margin-top:-2px">뷰포트 <b>480px 이하</b>에서는 아래 값으로 전환합니다. Display·H1은 한 단계 낮춰 한 화면에 과도하게 크게 잡히지 않게 하고, Body는 가독성을 위해 크기를 거의 유지합니다.</p>
+    <div class="scale scale-mobile">
+      <div class="scale-row"><span class="sc-tag">Display</span><span class="sc-demo" style="font-size:28px;font-weight:800">쉽게, 즐겁게</span><span class="sc-meta">40→28 / 800</span></div>
+      <div class="scale-row"><span class="sc-tag">H1</span><span class="sc-demo" style="font-size:23px;font-weight:700">상품 상세 타이틀</span><span class="sc-meta">30→23 / 700</span></div>
+      <div class="scale-row"><span class="sc-tag">H2</span><span class="sc-demo" style="font-size:19px;font-weight:600">섹션 제목</span><span class="sc-meta">22→19 / 600</span></div>
+      <div class="scale-row"><span class="sc-tag">H3</span><span class="sc-demo" style="font-size:16px;font-weight:600">카드 · 소제목</span><span class="sc-meta">17→16 / 600</span></div>
+      <div class="scale-row"><span class="sc-tag">Body</span><span class="sc-demo" style="font-size:14px;font-weight:400">본문, 상품 설명, 안내 문구</span><span class="sc-meta">15→14 / lh 1.6</span></div>
+      <div class="scale-row"><span class="sc-tag">Caption</span><span class="sc-demo" style="font-size:11px;font-weight:500;color:var(--ink-faint)">보조 설명 · 캡션 · 라벨</span><span class="sc-meta">12→11 / lh 1.5</span></div>
+    </div>
+
+    <h3>적용 예시</h3>
+    <div class="usage">
+      <div class="card">
+        <div class="u-head u-ok">✓ 올바른 사용</div>
+        <div class="demo on-white" style="align-items:stretch">
+          <div style="font-family:'Space Grotesk';font-size:11px;letter-spacing:.14em;color:var(--accent);text-transform:uppercase">VIVOIR PLAY LAB</div>
+          <div class="txt" style="font-size:19px;font-weight:700;font-family:var(--body)">굳은 어깨, 15분이면 리셋</div>
+          <div class="txt-sm">3단 강도 조절, 인체공학 그립. LP-0427</div>
+        </div>
+        <div class="grp-note" style="margin:12px 0 0">영문 이거브로우만 Space Grotesk, 실제 읽는 한글 제목·설명은 Pretendard.</div>
+      </div>
+      <div class="card">
+        <div class="u-head u-no">✕ 잘못된 사용</div>
+        <div class="demo on-white" style="align-items:stretch">
+          <div style="font-family:'Space Grotesk';font-size:11px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase">VIVOIR PLAY LAB</div>
+          <div class="txt" style="font-size:19px;font-weight:700;font-family:'Space Grotesk'">굳은 어깨, 15분이면 리셋</div>
+          <div class="txt-sm" style="font-family:'Space Grotesk'">3단 강도 조절, 인체공학 그립. LP-0427</div>
+        </div>
+        <div class="grp-note" style="margin:12px 0 0">한글에 Space Grotesk를 지정하면 글리프가 없어 시스템 기본 폰트로 깨져 보이고, 정보 가독성이 떨어짐.</div>
+      </div>
+    </div>
+    <div class="callout"><b>한 줄 원칙</b> — 한글이 한 글자라도 있으면 Pretendard. Space Grotesk는 로고 곁을 떠나지 않습니다.</div>
+  </section>
+
+  <!-- ============ SPACING ============ -->
+  <section id="spacing">
+    <h2><span class="n">05</span> Spacing</h2>
+    <p class="sec-desc">4px를 기본 단위로 하는 <b>4pt 그리드</b>를 씁니다. 연구소의 정돈된 인상은 여백의 규칙성에서 나옵니다 — 임의의 px값 대신 아래 스케일 안에서만 고릅니다.</p>
+
+    <div class="space-scale">
+      <div class="sp-row"><span class="sp-tag">4</span><i class="sp-bar" style="width:4px"></i><span class="sp-name">xs · 아이콘 내부 여백</span></div>
+      <div class="sp-row"><span class="sp-tag">8</span><i class="sp-bar" style="width:8px"></i><span class="sp-name">sm · 배지 내부, 인접 요소 간격</span></div>
+      <div class="sp-row"><span class="sp-tag">12</span><i class="sp-bar" style="width:12px"></i><span class="sp-name">md · 버튼 내부 여백</span></div>
+      <div class="sp-row"><span class="sp-tag">16</span><i class="sp-bar" style="width:16px"></i><span class="sp-name">base · 카드 내부 여백(모바일)</span></div>
+      <div class="sp-row"><span class="sp-tag">24</span><i class="sp-bar" style="width:24px"></i><span class="sp-name">lg · 카드 내부 여백(데스크톱)</span></div>
+      <div class="sp-row"><span class="sp-tag">32</span><i class="sp-bar" style="width:32px"></i><span class="sp-name">xl · 요소 그룹 간 간격</span></div>
+      <div class="sp-row"><span class="sp-tag">48</span><i class="sp-bar" style="width:48px"></i><span class="sp-name">2xl · 섹션 내부 블록 간격</span></div>
+      <div class="sp-row"><span class="sp-tag">64</span><i class="sp-bar" style="width:64px"></i><span class="sp-name">3xl · 섹션 상하 여백(모바일)</span></div>
+      <div class="sp-row"><span class="sp-tag">96</span><i class="sp-bar" style="width:96px"></i><span class="sp-name">4xl · 섹션 상하 여백(데스크톱)</span></div>
+    </div>
+
+    <h3>페이지 구조 기준값</h3>
+    <div class="usage">
+      <div class="card">
+        <div class="u-head" style="color:var(--accent)">데스크톱</div>
+        <ul class="kv-list">
+          <li><b>섹션 상하 여백</b><span>96px</span></li>
+          <li><b>카드 내부 여백</b><span>24px</span></li>
+          <li><b>버튼 내부 여백</b><span>12 · 24px</span></li>
+          <li><b>카드 사이 간격</b><span>16px</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="u-head" style="color:var(--accent)">모바일 (480px 이하)</div>
+        <ul class="kv-list">
+          <li><b>섹션 상하 여백</b><span>64px</span></li>
+          <li><b>카드 내부 여백</b><span>16px</span></li>
+          <li><b>버튼 내부 여백</b><span>10 · 20px</span></li>
+          <li><b>카드 사이 간격</b><span>12px</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">4의 배수를 벗어난 값(예: 10px, 15px, 22px)은 사용하지 않습니다. 스케일에 없는 간격이 필요하면 가장 가까운 값으로 반올림합니다.</div>
+  </section>
+
+  <!-- ============ ICONOGRAPHY ============ -->
+  <section id="icon">
+    <h2><span class="n">06</span> Iconography</h2>
+    <p class="sec-desc">너무 진지하거나 딱딱하지 않게, <b>선(line)으로만</b> 그리는 심플하고 친근한 스타일입니다. 면을 채우지 않습니다 — 이 규칙은 로고의 "외곽선 채우기 금지"와 반대로, 아이콘은 처음부터 선으로 설계합니다.</p>
+
+    <h3>스타일 사양</h3>
+    <div class="usage">
+      <div class="card">
+        <ul class="kv-list">
+          <li><b>선 두께</b><span>1.75px</span></li>
+          <li><b>선 끝 처리</b><span>Round cap · Round join</span></li>
+          <li><b>사이즈 그리드</b><span>16 · 20 · 24 · 32px</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <ul class="kv-list">
+          <li><b>기본 색상</b><span>Deep Navy</span></li>
+          <li><b>인터랙티브 색상</b><span>Sapphire</span></li>
+          <li><b>상태 점(뱃지용)</b><span>Neon Orange · Event만</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>기본 세트</h3>
+    <div class="icon-grid">
+      <div class="icon-card"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.3" y1="15.3" x2="21" y2="21"/></svg><span>피로도 분석</span></div>
+      <div class="icon-card"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span>충전 시간</span></div>
+      <div class="icon-card"><svg viewBox="0 0 24 24"><rect x="2" y="8" width="17" height="8" rx="2"/><path d="M19 10.5h2a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-2"/><rect x="5" y="10.5" width="8" height="3" fill="currentColor" stroke="none"/></svg><span>에너지 게이지</span></div>
+      <div class="icon-card"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg><span>안전 · 인증</span></div>
+      <div class="icon-card"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="11" rx="2"/><path d="M16 10h3l3 3v4h-6z"/><circle cx="7" cy="18.5" r="1.6"/><circle cx="18" cy="18.5" r="1.6"/></svg><span>배송</span></div>
+      <div class="icon-card"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="12.5" x2="13" y2="12.5"/></svg><span>고객 상담</span></div>
+    </div>
+
+    <h3>적용 예시</h3>
+    <div class="usage">
+      <div class="card">
+        <div class="u-head u-ok">✓ 올바른 사용</div>
+        <div class="demo on-white" style="flex-direction:row;align-items:center;gap:10px">
+          <svg viewBox="0 0 24 24" width="22" height="22" style="stroke:var(--sapphire);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          <span class="txt-sm" style="font-size:13.5px">KC 인증 완료 모터</span>
+        </div>
+        <div class="grp-note" style="margin:12px 0 0">선으로만 그린 아이콘 + Deep Navy/Sapphire. 정보 신뢰도를 해치지 않음.</div>
+      </div>
+      <div class="card">
+        <div class="u-head u-no">✕ 잘못된 사용</div>
+        <div class="demo on-white" style="flex-direction:row;align-items:center;gap:10px">
+          <svg viewBox="0 0 24 24" width="22" height="22" style="fill:var(--neon-orange);stroke:none"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg>
+          <span class="txt-sm" style="font-size:13.5px">KC 인증 완료 모터</span>
+        </div>
+        <div class="grp-note" style="margin:12px 0 0">인증·안전 아이콘을 면으로 채우거나 Orange로 쓰면 안 됩니다(Color 규칙 3 연장).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPONENTS : BUTTON ============ -->
+  <section id="c-button">
+    <h2><span class="n">07</span> Components</h2>
+    <p class="sec-desc">Color·Typography 규칙이 실제 화면에서 어떻게 조립되는지 보여줍니다. <span class="wip-badge" style="margin-left:2px">개발중</span> 표시가 없는 컴포넌트는 확정 규정입니다.</p>
+
+    <h3 style="margin-top:8px">Button</h3>
+    <div class="grp-note">CTA는 언제나 <b>Sapphire</b>가 기본입니다(Color 규칙 2). Event 컬러는 버튼 배경으로 쓰지 않습니다.</div>
+    <div class="btn-lab">
+      <div class="btn-row">
+        <button class="bt bt-primary">구매하기</button>
+        <span class="bt-tag">Primary · Sapphire</span>
+      </div>
+      <div class="btn-row">
+        <button class="bt bt-secondary">장바구니 담기</button>
+        <span class="bt-tag">Secondary · Ice Blue</span>
+      </div>
+      <div class="btn-row">
+        <button class="bt bt-ghost">자세히 보기</button>
+        <span class="bt-tag">Ghost · Outline</span>
+      </div>
+      <div class="btn-row">
+        <button class="bt bt-disabled" disabled>품절</button>
+        <span class="bt-tag">Disabled</span>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="card">
+        <div class="u-head u-ok">✓ 올바른 사용</div>
+        <div class="demo on-white" style="flex-direction:row;gap:10px">
+          <button class="bt bt-primary">구매하기</button>
+          <button class="bt bt-secondary">담기</button>
+        </div>
+        <div class="grp-note" style="margin:12px 0 0">주 행동은 Sapphire 하나만. 화면에 강조 버튼이 두 개 이상 경쟁하지 않습니다.</div>
+      </div>
+      <div class="card">
+        <div class="u-head u-no">✕ 잘못된 사용</div>
+        <div class="demo on-white" style="flex-direction:row;gap:10px">
+          <button class="bt" style="background:var(--neon-orange);color:#fff;border:none">구매하기</button>
+          <button class="bt bt-secondary">담기</button>
+        </div>
+        <div class="grp-note" style="margin:12px 0 0">Orange를 CTA로 쓰면 상시 화면에서 Event 색이 메인이 되어 규칙 위반.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPONENTS : BADGE ============ -->
+  <section id="c-badge">
+    <h3>Badge &amp; Label</h3>
+    <div class="grp-note">배지는 Orange가 허락되는 몇 안 되는 자리입니다(Color 규칙 4) — 단, <b>작은 점 크기</b>로만.</div>
+    <div class="badge-lab">
+      <div class="badge-row">
+        <span class="bd bd-info">신제품</span>
+        <span class="bd bd-info">무료배송</span>
+        <span class="bt-tag">Core · 정보성 배지 · Powder Blue</span>
+      </div>
+      <div class="badge-row">
+        <span class="bd bd-play">PLAY</span>
+        <span class="bd bd-lp">LP-0427</span>
+        <span class="bt-tag">Event · 놀이 신호 · Neon Orange</span>
+      </div>
+      <div class="badge-row">
+        <span class="bd bd-soldout">품절</span>
+        <span class="bd bd-new">NEW</span>
+        <span class="bt-tag">Core · 상태 라벨 · Deep Navy</span>
+      </div>
+    </div>
+    <div class="callout">배지 한 줄에 Orange 배지는 <b>하나까지</b>입니다. 여러 개를 겹치면 PDP의 0~3% 상한을 넘기기 쉽습니다.</div>
+  </section>
+
+  <!-- ============ COMPONENTS : FORM & INPUT ============ -->
+  <section id="c-form">
+    <h3>Form &amp; Input</h3>
+    <div class="grp-note">포커스 상태는 언제나 <b>Sapphire 링</b>입니다. 성공·오류 색은 브랜드 Core/Event가 아닌 <b>기능색(Functional Color)</b>으로 별도 관리합니다 — 브랜드 톤을 희석하지 않기 위함입니다.</div>
+
+    <div class="form-lab">
+      <div class="f-group">
+        <label class="f-label">상품 옵션</label>
+        <input class="f-input" placeholder="기본 상태" />
+      </div>
+      <div class="f-group">
+        <label class="f-label">포커스 상태</label>
+        <input class="f-input f-focus" placeholder="입력 중..." />
+      </div>
+      <div class="f-group">
+        <label class="f-label f-label-err">배송지 우편번호</label>
+        <input class="f-input f-error" value="12345a" />
+        <span class="f-help f-help-err">우편번호는 숫자만 입력하세요</span>
+      </div>
+      <div class="f-group">
+        <label class="f-label">품절 옵션</label>
+        <input class="f-input f-disabled" placeholder="선택 불가" disabled />
+      </div>
+      <div class="f-group">
+        <label class="f-label">상품 검색</label>
+        <div class="f-search">
+          <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.3" y1="15.3" x2="21" y2="21"/></svg>
+          <input placeholder="찾으시는 상품을 입력하세요" />
+        </div>
+      </div>
+      <div class="f-group">
+        <label class="f-label">체크 · 라디오</label>
+        <div class="f-choices">
+          <label class="f-check"><input type="checkbox" checked/> 재입고 알림 신청</label>
+          <label class="f-radio"><input type="radio" name="opt" checked/> 화이트</label>
+          <label class="f-radio"><input type="radio" name="opt"/> 사파이어</label>
+        </div>
+      </div>
+    </div>
+    <div class="callout"><b>기능색</b> — Error #E5484D · Success #1FAA59. 유효성 검증 등 기능적 피드백에만 쓰고, 배지·버튼 등 브랜드 표현에는 사용하지 않습니다.</div>
+  </section>
+
+  <!-- ============ VOICE & TONE ============ -->
+  <section id="voice">
+    <h2><span class="n">08</span> Voice &amp; Tone</h2>
+    <p class="sec-desc">비브아는 <b>진짜 연구소</b>입니다. 하얀 가운을 입은 전문가가 기본이고, 놀이는 그 전문가가 이벤트에서 잠깐 보여주는 반전 매력입니다. 그래서 목소리도 <b>90% Lab / 10% Play Lab</b>으로 나눕니다.</p>
+
+    <h3>영역별 톤 배분</h3>
+    <div class="ratio">
+      <span class="r90" style="flex:0 0 90%;background:var(--sapphire);color:#fff">90% · CLINICAL LAB — 상시</span>
+      <span class="r10" style="flex:0 0 10%">10% · PLAY</span>
+    </div>
+    <div class="ratio-cap"><span style="flex:0 0 90%">신뢰·근거 중심. 위트·캐릭터·네온 없음.</span><span style="flex:0 0 10%">이벤트 한정</span></div>
+
+    <div class="vt-grid">
+      <div class="vt-card">
+        <div class="vt-head"><span class="tag tag-core">Lab · 상시 90%</span></div>
+        <div class="vt-where">메인 · 상품 상세 · 스펙/인증 · 브랜드 스토리 · 패키지 기본 · CS</div>
+        <div class="vt-do">전문적이고 차분하게. 숫자·근거·안전으로 신뢰를 쌓습니다. 성능과 안전을 약속하는 말에는 절대 위트를 섞지 않습니다.</div>
+        <div class="vt-ex vt-ex-ok">"굳은 어깨, 15분이면 리셋. 3단 강도 조절과 KC 인증 모터."</div>
+      </div>
+      <div class="vt-card">
+        <div class="vt-head"><span class="tag tag-event">Play · 이벤트 10%</span></div>
+        <div class="vt-where">시즌 프로모션 · 신제품 캠페인 · 패키지 내부 카드 · 캐릭터 굿즈 · SNS 이벤트</div>
+        <div class="vt-do">플레이랩 세계관 풀가동. 닥터 라보, "게으름의 과학", TOP SECRET 컨셉을 마음껏. 단, 여기 밖으로 새어 나가지 않습니다.</div>
+        <div class="vt-ex vt-ex-play">"[TOP SECRET] 프로젝트 V-01 한정 방출. 당신의 게으름은 인류의 진보입니다."</div>
+      </div>
+    </div>
+
+    <div class="callout"><b>경계 규칙</b> — 성능·안전·인증·A/S·가격 정보는 언제나 Lab 톤(진지)으로만 씁니다. Play 톤은 "무엇을 약속하느냐"가 아니라 "어떻게 초대하느냐(이벤트)"에만 사용합니다.</div>
+  </section>
+
+  <div class="footnote">VIVOIR Design System · V1 draft · Logo · Do/Don't · Color(Core/Event) · Typography · Spacing · Iconography · Components(Button/Badge/Form) · Voice&Tone — Photography · Brand Concept는 개발중</div>
+
+</div>
+</main>
+
+<script>
+  const root=document.documentElement, btn=document.getElementById('themeToggle');
+  btn.addEventListener('click',()=>{
+    const dark=root.getAttribute('data-theme')==='dark';
+    root.setAttribute('data-theme',dark?'light':'dark');
+    btn.textContent=dark?'◐ 다크 모드':'◑ 라이트 모드';
+  });
+  // sidebar active on click
+  document.querySelectorAll('.sb-group a.jump').forEach(a=>{
+    a.addEventListener('click',()=>{
+      document.querySelectorAll('.sb-group a').forEach(x=>x.classList.remove('active'));
+      a.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

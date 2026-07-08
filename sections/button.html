@@ -1,0 +1,45 @@
+  <!-- ============ COMPONENTS : BUTTON ============ -->
+  <section id="c-button">
+    <h2><span class="n">07</span> Components</h2>
+    <p class="sec-desc">Color·Typography 규칙이 실제 화면에서 어떻게 조립되는지 보여줍니다. <span class="wip-badge" style="margin-left:2px">개발중</span> 표시가 없는 컴포넌트는 확정 규정입니다.</p>
+
+    <h3 style="margin-top:8px">Button</h3>
+    <div class="grp-note">CTA는 언제나 <b>Sapphire</b>가 기본입니다(Color 규칙 2). Event 컬러는 버튼 배경으로 쓰지 않습니다.</div>
+    <div class="btn-lab">
+      <div class="btn-row">
+        <button class="bt bt-primary">구매하기</button>
+        <span class="bt-tag">Primary · Sapphire</span>
+      </div>
+      <div class="btn-row">
+        <button class="bt bt-secondary">장바구니 담기</button>
+        <span class="bt-tag">Secondary · Ice Blue</span>
+      </div>
+      <div class="btn-row">
+        <button class="bt bt-ghost">자세히 보기</button>
+        <span class="bt-tag">Ghost · Outline</span>
+      </div>
+      <div class="btn-row">
+        <button class="bt bt-disabled" disabled>품절</button>
+        <span class="bt-tag">Disabled</span>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="card">
+        <div class="u-head u-ok">✓ 올바른 사용</div>
+        <div class="demo on-white" style="flex-direction:row;gap:10px">
+          <button class="bt bt-primary">구매하기</button>
+          <button class="bt bt-secondary">담기</button>
+        </div>
+        <div class="grp-note" style="margin:12px 0 0">주 행동은 Sapphire 하나만. 화면에 강조 버튼이 두 개 이상 경쟁하지 않습니다.</div>
+      </div>
+      <div class="card">
+        <div class="u-head u-no">✕ 잘못된 사용</div>
+        <div class="demo on-white" style="flex-direction:row;gap:10px">
+          <button class="bt" style="background:var(--neon-orange);color:#fff;border:none">구매하기</button>
+          <button class="bt bt-secondary">담기</button>
+        </div>
+        <div class="grp-note" style="margin:12px 0 0">Orange를 CTA로 쓰면 상시 화면에서 Event 색이 메인이 되어 규칙 위반.</div>
+      </div>
+    </div>
+  </section>

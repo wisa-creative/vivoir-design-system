@@ -1,0 +1,69 @@
+  <!-- ============ TYPOGRAPHY ============ -->
+  <section id="typography">
+    <h2><span class="n">04</span> Typography</h2>
+    <p class="sec-desc">구매자가 실제로 읽는 글자는 <b>전부 한글</b>입니다. 그래서 정보를 전달하는 모든 곳은 <b>Pretendard</b> 하나로 통일하고, 지오메트릭한 <b>Space Grotesk</b>는 로고 옆에 붙는 영문 브랜드 요소에만 씁니다. 컬러의 Core/Event 원칙과 같은 구조입니다 — <b>가독성이 기본, 브랜드 향은 포인트로만.</b></p>
+
+    <div class="grp-label"><span class="tag tag-core">Core</span><h3>Pretendard — 읽는 모든 것</h3></div>
+    <div class="grp-note">페이지 제목 · 상품명 · 설명 · 본문 · 버튼 · UI 문구 · 숫자. 한글이 하나라도 섞이면 예외 없이 Pretendard입니다.</div>
+    <div class="type-sample core-sample">
+      <div class="ts-face">Pretendard</div>
+      <div class="ts-row"><span class="ts-w">ExtraBold 800</span><span class="ts-txt" style="font-weight:800">굳은 어깨, 15분이면 리셋</span></div>
+      <div class="ts-row"><span class="ts-w">Bold 700</span><span class="ts-txt" style="font-weight:700">쉽게, 즐겁게, 비브아답게</span></div>
+      <div class="ts-row"><span class="ts-w">SemiBold 600</span><span class="ts-txt" style="font-weight:600">비브아 미니 포켓 마사지건</span></div>
+      <div class="ts-row"><span class="ts-w">Regular 400</span><span class="ts-txt" style="font-weight:400">손바닥에 쏙 들어오는 미니 포켓 마사지건. 사무실에서, 여행지에서.</span></div>
+    </div>
+
+    <div class="grp-label"><span class="tag tag-event">Accent</span><h3>Space Grotesk — 브랜드 향, 영문 전용</h3></div>
+    <div class="grp-note">로고 곁 태그라인 · "PLAY LAB" 워드마크 · LP 코드 · 섹션 이거브로우 등 <b>순수 영문 요소</b>에서만 사용. 한글과 절대 같은 문장에 섞지 않습니다.</div>
+    <div class="type-sample accent-sample">
+      <div class="ts-face" style="font-family:'Space Grotesk'">Space Grotesk</div>
+      <div class="ts-row"><span class="ts-w">Bold 700</span><span class="ts-txt" style="font-family:'Space Grotesk';font-weight:700">VIVOIR PLAY LAB</span></div>
+      <div class="ts-row"><span class="ts-w">Medium 500</span><span class="ts-txt" style="font-family:'Space Grotesk';font-weight:500">PLAY EASY, FEEL GOOD.</span></div>
+      <div class="ts-row"><span class="ts-w">Mono label</span><span class="ts-txt" style="font-family:'JetBrains Mono';font-size:12px;letter-spacing:.06em">LP-0427 · V-01 PROJECT</span></div>
+    </div>
+
+    <h3>타입 스케일</h3>
+    <div class="scale">
+      <div class="scale-row"><span class="sc-tag">Display</span><span class="sc-demo" style="font-size:40px;font-weight:800">쉽게, 즐겁게</span><span class="sc-meta">40 / 800 / -1%</span></div>
+      <div class="scale-row"><span class="sc-tag">H1</span><span class="sc-demo" style="font-size:30px;font-weight:700">상품 상세 타이틀</span><span class="sc-meta">30 / 700 / -1%</span></div>
+      <div class="scale-row"><span class="sc-tag">H2</span><span class="sc-demo" style="font-size:22px;font-weight:600">섹션 제목</span><span class="sc-meta">22 / 600 / -0.5%</span></div>
+      <div class="scale-row"><span class="sc-tag">H3</span><span class="sc-demo" style="font-size:17px;font-weight:600">카드 · 소제목</span><span class="sc-meta">17 / 600 / 0%</span></div>
+      <div class="scale-row"><span class="sc-tag">Body</span><span class="sc-demo" style="font-size:15px;font-weight:400">본문, 상품 설명, 안내 문구</span><span class="sc-meta">15 / 400 / lh 1.7</span></div>
+      <div class="scale-row"><span class="sc-tag">Caption</span><span class="sc-demo" style="font-size:12px;font-weight:500;color:var(--ink-faint)">보조 설명 · 캡션 · 라벨</span><span class="sc-meta">12 / 500 / lh 1.5</span></div>
+    </div>
+    <p class="sec-desc" style="margin-top:-4px">한글은 라틴 대비 행간이 좁아 보이므로, 본문은 <b>줄간격 1.6~1.7</b>로 여유 있게 둡니다.</p>
+
+    <h3>모바일 스케일 <span style="font-family:var(--mono);font-size:11px;color:var(--ink-faint);font-weight:400">— 구매자 대부분이 보는 화면</span></h3>
+    <p class="sec-desc" style="margin-top:-2px">뷰포트 <b>480px 이하</b>에서는 아래 값으로 전환합니다. Display·H1은 한 단계 낮춰 한 화면에 과도하게 크게 잡히지 않게 하고, Body는 가독성을 위해 크기를 거의 유지합니다.</p>
+    <div class="scale scale-mobile">
+      <div class="scale-row"><span class="sc-tag">Display</span><span class="sc-demo" style="font-size:28px;font-weight:800">쉽게, 즐겁게</span><span class="sc-meta">40→28 / 800</span></div>
+      <div class="scale-row"><span class="sc-tag">H1</span><span class="sc-demo" style="font-size:23px;font-weight:700">상품 상세 타이틀</span><span class="sc-meta">30→23 / 700</span></div>
+      <div class="scale-row"><span class="sc-tag">H2</span><span class="sc-demo" style="font-size:19px;font-weight:600">섹션 제목</span><span class="sc-meta">22→19 / 600</span></div>
+      <div class="scale-row"><span class="sc-tag">H3</span><span class="sc-demo" style="font-size:16px;font-weight:600">카드 · 소제목</span><span class="sc-meta">17→16 / 600</span></div>
+      <div class="scale-row"><span class="sc-tag">Body</span><span class="sc-demo" style="font-size:14px;font-weight:400">본문, 상품 설명, 안내 문구</span><span class="sc-meta">15→14 / lh 1.6</span></div>
+      <div class="scale-row"><span class="sc-tag">Caption</span><span class="sc-demo" style="font-size:11px;font-weight:500;color:var(--ink-faint)">보조 설명 · 캡션 · 라벨</span><span class="sc-meta">12→11 / lh 1.5</span></div>
+    </div>
+
+    <h3>적용 예시</h3>
+    <div class="usage">
+      <div class="card">
+        <div class="u-head u-ok">✓ 올바른 사용</div>
+        <div class="demo on-white" style="align-items:stretch">
+          <div style="font-family:'Space Grotesk';font-size:11px;letter-spacing:.14em;color:var(--accent);text-transform:uppercase">VIVOIR PLAY LAB</div>
+          <div class="txt" style="font-size:19px;font-weight:700;font-family:var(--body)">굳은 어깨, 15분이면 리셋</div>
+          <div class="txt-sm">3단 강도 조절, 인체공학 그립. LP-0427</div>
+        </div>
+        <div class="grp-note" style="margin:12px 0 0">영문 이거브로우만 Space Grotesk, 실제 읽는 한글 제목·설명은 Pretendard.</div>
+      </div>
+      <div class="card">
+        <div class="u-head u-no">✕ 잘못된 사용</div>
+        <div class="demo on-white" style="align-items:stretch">
+          <div style="font-family:'Space Grotesk';font-size:11px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase">VIVOIR PLAY LAB</div>
+          <div class="txt" style="font-size:19px;font-weight:700;font-family:'Space Grotesk'">굳은 어깨, 15분이면 리셋</div>
+          <div class="txt-sm" style="font-family:'Space Grotesk'">3단 강도 조절, 인체공학 그립. LP-0427</div>
+        </div>
+        <div class="grp-note" style="margin:12px 0 0">한글에 Space Grotesk를 지정하면 글리프가 없어 시스템 기본 폰트로 깨져 보이고, 정보 가독성이 떨어짐.</div>
+      </div>
+    </div>
+    <div class="callout"><b>한 줄 원칙</b> — 한글이 한 글자라도 있으면 Pretendard. Space Grotesk는 로고 곁을 떠나지 않습니다.</div>
+  </section>
