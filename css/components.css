@@ -254,6 +254,22 @@
   .wbtn{height:20px;width:104px;border-radius:6px;background:var(--accent);margin-top:8px}
   .wrow{display:flex;gap:8px}.wrow>*{flex:1;margin-top:0}
   .wbox.wplay{background:linear-gradient(150deg,#FF6B35,#0F52BA)}
+  /* wireframe light/dark variants (테마 무관 고정) */
+  .pdp-wire.light{background:#fff;border-color:#E3ECF5}
+  .pdp-wire.light .pdp-sec{border-top-color:#E3ECF5}
+  .pdp-wire.light .plab{color:#8A9BAD}
+  .pdp-wire.light .plab b{color:#0F52BA}
+  .pdp-wire.light .wbox{background:linear-gradient(150deg,#D6E6F3,#A6C5D8)}
+  .pdp-wire.light .wbar{background:#CBDBEC}
+  .pdp-wire.light .wbtn{background:#0F52BA}
+  .pdp-wire.dark{background:#000926;border-color:#1F3457}
+  .pdp-wire.dark .pdp-sec{border-top-color:#152641}
+  .pdp-wire.dark .plab{color:#8AA0BC}
+  .pdp-wire.dark .plab b{color:#7FB0FF}
+  .pdp-wire.dark .wbox{background:linear-gradient(150deg,#173a5f,#2c5c7d)}
+  .pdp-wire.dark .wbar{background:#274766}
+  .pdp-wire.dark .wbtn{background:#fff}
+  .pdp-wire.light .wbox.wplay,.pdp-wire.dark .wbox.wplay{background:linear-gradient(150deg,#FF6B35,#0F52BA)}
   .wdot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--neon-orange);vertical-align:middle}
 
   /* extra components: FAQ / gauge / step */
