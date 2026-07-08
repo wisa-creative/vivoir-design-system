@@ -44,6 +44,7 @@ async function init() {
     loadFragment('sections/button.html',     'section-button'),
     loadFragment('sections/badge.html',      'section-badge'),
     loadFragment('sections/form.html',       'section-form'),
+    loadFragment('sections/components2.html',   'section-cards'),
     loadFragment('sections/voice.html',         'section-voice'),
     loadFragment('sections/photography.html',   'section-photography'),
     loadFragment('sections/pdp.html',           'section-pdp'),

@@ -256,6 +256,31 @@
   .wbox.wplay{background:linear-gradient(150deg,#FF6B35,#0F52BA)}
   .wdot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--neon-orange);vertical-align:middle}
 
+  /* extra components: FAQ / gauge / step */
+  .faq{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--surface);max-width:440px}
+  .faq details{border-top:1px solid var(--line)}
+  .faq details:first-child{border-top:none}
+  .faq summary{list-style:none;cursor:pointer;padding:13px 16px;font-size:13.5px;font-weight:600;
+    color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";color:var(--accent);font-family:var(--mono);font-size:17px;line-height:1}
+  .faq details[open] summary::after{content:"\2013"}
+  .faq .fa{padding:0 16px 14px;font-size:13px;color:var(--ink-soft);line-height:1.65}
+
+  .gauge{display:flex;align-items:center;gap:12px}
+  .gauge .track{flex:1;height:10px;border-radius:999px;background:var(--bg-soft);position:relative}
+  .gauge .fill{position:absolute;left:0;top:0;height:100%;border-radius:999px;background:var(--sapphire)}
+  .gauge .tip{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;background:var(--neon-orange);
+    transform:translate(-50%,-50%);border:2px solid var(--surface)}
+  .gauge .lv{font-family:var(--mono);font-size:11px;color:var(--ink-soft);flex:0 0 auto}
+
+  .step{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
+  .step:first-child{border-top:none}
+  .step .num{flex:0 0 24px;height:24px;border-radius:50%;background:var(--sapphire);color:#fff;
+    font-family:var(--mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center}
+  .step .st b{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
+  .step .st span{color:var(--ink-soft);font-size:12.5px}
+
   .footnote{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
     font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
 
