@@ -5,7 +5,8 @@
     /* Foundations — Color (from styleguide p.9) */
     --sapphire:#0F52BA;      /* Main */
     --deep-navy:#000926;     /* Sub */
-    --powder:#A6C5D8;        /* Soft Powder Blue */
+    --powder:#46C5D7;        /* Powder Blue (PDF 공식) — 생동감 보조 포인트 */
+    --ui-mist:#A6C5D8;       /* UI 중립 틴트 (카드·라인) — 브랜드색 아님 */
     --ice:#D6E6F3;
     --neon-orange:#FF6B35;   /* Event only */
     --yellow:#FFBF00;        /* Event only */
