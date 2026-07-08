@@ -47,11 +47,16 @@ async function init() {
     loadFragment('sections/voice.html',         'section-voice'),
     loadFragment('sections/photography.html',   'section-photography'),
     loadFragment('sections/pdp.html',           'section-pdp'),
+    loadFragment('sections/brand-world.html',   'section-brand-world'),
+    loadFragment('sections/copy-rule.html',     'section-copy-rule'),
+    loadFragment('sections/banner.html',        'section-banner'),
+    loadFragment('sections/product-card.html',  'section-product-card'),
     loadFragment('sections/footnote.html',      'section-footnote'),
   ]);
 
   bindThemeToggle();
   bindSidebarActive();
+  bindScrollSpy();
 }
 
 function bindThemeToggle() {
@@ -72,6 +77,31 @@ function bindSidebarActive() {
       a.classList.add('active');
     });
   });
+}
+
+// 스크롤 위치에 따라 사이드바에서 현재 섹션을 자동 하이라이트
+function bindScrollSpy() {
+  if (!('IntersectionObserver' in window)) return;
+  const links = new Map();
+  document.querySelectorAll('.sb-group a.jump').forEach((a) => {
+    const href = a.getAttribute('href') || '';
+    if (href.startsWith('#') && href !== '#top') links.set(href.slice(1), a);
+  });
+  const targets = [];
+  links.forEach((_, id) => {
+    const el = document.getElementById(id);
+    if (el) targets.push(el);
+  });
+  if (!targets.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      document.querySelectorAll('.sb-group a').forEach((x) => x.classList.remove('active'));
+      const a = links.get(e.target.id);
+      if (a) a.classList.add('active');
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+  targets.forEach((t) => io.observe(t));
 }
 
 document.addEventListener('DOMContentLoaded', init);
