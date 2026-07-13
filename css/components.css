@@ -304,11 +304,12 @@
   .ix-card:hover .mascot-img{transform:translateY(-7px) scale(1.06) rotate(-1.5deg)}
 
   .bt,.btn-core{transition:background .15s ease, transform .12s ease, box-shadow .15s ease}
-  .bt:hover:not(.bt-disabled),.btn-core:hover{transform:translateY(-1px)}
-  .bt-primary:hover,.btn-core:hover{box-shadow:0 8px 18px -8px rgba(15,82,186,.55)}
-  .bt-ghost:hover{background:rgba(15,82,186,.07)}
-  .bt-secondary:hover{filter:brightness(.97)}
-  .bt:active:not(.bt-disabled),.btn-core:active{transform:translateY(0)}
+  /* 주 CTA(Primary·btn-core): 살짝 뜨고 그림자 */
+  .bt-primary:hover,.btn-core:hover{transform:translateY(-1px);box-shadow:0 8px 18px -8px rgba(15,82,186,.55)}
+  .bt-primary:active,.btn-core:active{transform:translateY(0);box-shadow:none}
+  /* 보조 버튼(Ghost·Secondary): 그림자·이동 없이 색만 중간 톤으로 */
+  .bt-ghost:hover{background:rgba(15,82,186,.12)}
+  .bt-secondary:hover{background:#C4DBF2}
 
   .icon-card{transition:transform .15s ease, border-color .15s ease, box-shadow .15s ease}
   .icon-card:hover{transform:translateY(-2px);border-color:var(--line-strong);box-shadow:0 8px 18px -10px rgba(11,27,51,.2)}
